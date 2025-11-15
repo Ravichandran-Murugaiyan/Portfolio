@@ -18,8 +18,8 @@ const Hero = () => {
     
     window.addEventListener('mousemove', handleMouseMove);
     
-    // Enhanced Matrix effect with 200 characters for more density
-    const chars = Array.from({ length: 200 }, (_, i) => ({
+    // Increased Matrix effect with 300 characters for more density
+    const chars = Array.from({ length: 300 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -85,7 +85,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="hero-section">
-      {/* Enhanced Matrix Background */}
+      {/* Enhanced Matrix Background with more characters */}
       <div className="matrix-container">
         {matrixChars.map((char) => (
           <div
@@ -175,7 +175,7 @@ const Hero = () => {
               <span className="command-text">initializing_portfolio_system.exe</span>
             </div>
             
-            {/* Main Name with Enhanced Visibility */}
+            {/* Main Name with Mobile Responsive Adjustment */}
             <h1 className="hero-name">
               <span className="name-text">
                 RAVICHANDRAN
@@ -192,12 +192,12 @@ const Hero = () => {
             </div>
 
             {/* Enhanced Description */}
-            <div className="description-box">
+            {/* <div className="description-box">
               <p className="description-text">
                 <span className="dollar-sign">$</span> Crafting digital excellence through innovative full-stack solutions. 
                 Specializing in MERN stack, AI integration, and cybersecurity-focused development.
               </p>
-            </div>
+            </div> */}
 
             {/* Enhanced Buttons */}
             <div className="hero-buttons">
