@@ -10,7 +10,7 @@ const Projects = () => {
       tech: ["Python", "Django", "Sqlite3", "HTML,CSS,JS"], 
       liveDemo: "https://rc-shirts-k9kl.onrender.com",
       github: "https://github.com/Ravichandran-Murugaiyan/RC-Shirts.git",
-      status: "ACTIVE",
+      status: "DEPLOYED",
       icon: <Server size={20} />
     },
     {

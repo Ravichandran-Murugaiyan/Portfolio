@@ -1,29 +1,32 @@
 import React from "react";
-import { Award, BookOpen, Cloud, Database, Code2, Shield } from "lucide-react";
+import { Award, BookOpen, Cloud, Database, Code2, Shield, ExternalLink } from "lucide-react";
 import "./style.css";
 
 const Certifications = () => {
   const certifications = [
     {
-      name: "The Complete Full Stack Development Bootcamp 2025",
-      org: "Udemy",
-      icon: <Code2 size={24} />,
-      description: "Comprehensive full-stack development training covering modern web technologies and frameworks",
-      status: "COMPLETED"
-    },
-    {
-      name: "A Beginner Data Analytics",
+      name: "Google Cloud Engineering Certificate",
       org: "Google Cloud",
-      icon: <Cloud size={24} />,
-      description: "Fundamentals of data analysis and visualization using Google Cloud platform",
-      status: "CERTIFIED"
+      icon: "/google.png",
+      description: "Thorough understanding of cloud infrastructure and services on Google Cloud Platform",
+      status: "COMPLETED",
+      link: "https://credly.com/earner/earned/badge/ef7e40a0-fec9-4a71-9874-3e0df93ca6bd"
     },
     {
-      name: "Complete Data Science Bootcamp 2025",
+      name: "The Complete Full-stack Web Development Bootcamp",
       org: "Udemy",
-      icon: <Database size={24} />,
-      description: "End-to-end data science and machine learning with practical projects",
-      status: "COMPLETED"
+      icon: "/udemy.png",
+      description: "Comprehensive full-stack development training covering modern web technologies and frameworks",
+      status: "CERTIFIED",
+      link: "https://www.udemy.com/certificate/UC-966d7eac-0f46-45a5-b3ea-04784e2933cc/"
+    },
+    {
+      name: "Google Cloud Data Analytics Certificate",
+      org: "Google Cloud",
+      icon: "/google.png",
+      description: "In-depth knowledge of data analytics and big data solutions on Google Cloud Platform",
+      status: "COMPLETED",
+      link: "https://credly.com/earner/earned/badge/0e290499-bbd1-4af3-a05f-9c39e057867c"
     }
   ];
 
@@ -36,6 +39,10 @@ const Certifications = () => {
       default:
         return <Shield size={20} />;
     }
+  };
+
+  const handleViewCertificate = (link) => {
+    window.open(link, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -53,9 +60,6 @@ const Certifications = () => {
             </div>
           </div>
           <h2 className="section-title">SECURITY_CLEARANCES</h2>
-          <p className="section-subtitle">
-            Verified credentials and professional certifications in cutting-edge technologies
-          </p>
         </div>
 
         {/* Certifications Grid */}
@@ -64,7 +68,11 @@ const Certifications = () => {
             <div key={idx} className="certification-card">
               <div className="certification-header">
                 <div className="certification-icon">
-                  {cert.icon}
+                  <img 
+                    src={cert.icon} 
+                    alt={`${cert.org} logo`}
+                    className="certification-logo"
+                  />
                 </div>
                 <div className="certification-status">
                   {cert.status}
@@ -91,6 +99,15 @@ const Certifications = () => {
                   VERIFIED
                 </div>
               </div>
+
+              {/* View Certificate Button */}
+              <button 
+                className="view-certificate-btn"
+                onClick={() => handleViewCertificate(cert.link)}
+              >
+                <ExternalLink size={16} />
+                VIEW_CERTIFICATE
+              </button>
 
               {/* Hover Glow Effect */}
               <div className="certification-glow"></div>

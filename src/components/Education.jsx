@@ -45,7 +45,11 @@ const Education = () => {
         <div className="education-card">
           <div className="education-content">
             <div className="education-icon-main">
-              <BookOpen size={36} />
+              <img 
+                src="/escet.png" 
+                alt="E.S College Of Engineering And Technology" 
+                className="college-logo"
+              />
             </div>
             
             <div className="education-details">

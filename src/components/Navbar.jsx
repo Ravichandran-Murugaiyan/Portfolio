@@ -1,28 +1,67 @@
-import React, { useState, useEffect } from "react";
-import { Menu, X, Terminal, Code2, User, FolderOpen, GraduationCap, Mail, Shield } from "lucide-react";
+import React, { useState, useEffect, useRef } from "react";
+import { Menu, X, Terminal, Code2, User, FolderOpen, GraduationCap, Mail, Shield, Volume2, VolumeX } from "lucide-react";
 import "./style.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [audioLoaded, setAudioLoaded] = useState(false);
+  const audioRef = useRef(null);
 
   const navItems = [
-    { name: "Home", href: "#home", icon: <Terminal size={18} /> },
     { name: "About", href: "#about", icon: <User size={18} /> },
     { name: "Skills", href: "#skills", icon: <Code2 size={18} /> },
     { name: "Projects", href: "#projects", icon: <FolderOpen size={18} /> },
-    { name: "Education", href: "#education", icon: <GraduationCap size={18} /> },
     { name: "Certifications", href: "#certifications", icon: <Shield size={18} /> },
+    { name: "Education", href: "#education", icon: <GraduationCap size={18} /> },
     { name: "Contact", href: "#contact", icon: <Mail size={18} /> }
   ];
+
+  // Initialize audio
+  useEffect(() => {
+    audioRef.current = new Audio('/theme.mp3'); // Make sure to add this file to your public folder
+    audioRef.current.loop = true;
+    audioRef.current.volume = 0.3;
+    
+    audioRef.current.addEventListener('canplaythrough', () => {
+      setAudioLoaded(true);
+    });
+
+    audioRef.current.addEventListener('error', (e) => {
+      console.log('Audio loading error:', e);
+      setAudioLoaded(false);
+    });
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  const toggleMusic = () => {
+    if (!audioLoaded) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play().catch(error => {
+        console.log('Audio play failed:', error);
+      });
+      setIsPlaying(true);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
       // Update active section based on scroll position
-      const sections = navItems.map(item => item.href.substring(1));
+      const sections = ['home', ...navItems.map(item => item.href.substring(1))];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -85,6 +124,30 @@ const Navbar = () => {
             <span className="logo-text">
               RAVICHANDRAN
             </span>
+            
+            {/* Music Beats */}
+            <div className="music-beats-container">
+              <button 
+                className={`music-toggle-btn ${isPlaying ? 'playing' : ''}`}
+                onClick={toggleMusic}
+                disabled={!audioLoaded}
+                aria-label={isPlaying ? "Stop music" : "Play music"}
+              >
+                {isPlaying ? <Volume2 size={16} /> : <VolumeX size={16} />}
+                
+                {/* Animated Beats */}
+                <div className="music-beats">
+                  <div className={`beat-bar ${isPlaying ? 'animate' : ''}`} style={{ animationDelay: '0s' }}></div>
+                  <div className={`beat-bar ${isPlaying ? 'animate' : ''}`} style={{ animationDelay: '0.2s' }}></div>
+                  <div className={`beat-bar ${isPlaying ? 'animate' : ''}`} style={{ animationDelay: '0.4s' }}></div>
+                  <div className={`beat-bar ${isPlaying ? 'animate' : ''}`} style={{ animationDelay: '0.6s' }}></div>
+                </div>
+              </button>
+              
+              {!audioLoaded && (
+                <div className="audio-loading">LOADING...</div>
+              )}
+            </div>
           </div>
 
           {/* Desktop Navigation */}
@@ -126,6 +189,18 @@ const Navbar = () => {
                 <Terminal size={28} />
                 <span>NAVIGATION</span>
               </div>
+              
+              {/* Mobile Music Control */}
+              <div className="mobile-music-control">
+                <button 
+                  className={`music-toggle-btn mobile ${isPlaying ? 'playing' : ''}`}
+                  onClick={toggleMusic}
+                  disabled={!audioLoaded}
+                >
+                  {isPlaying ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                </button>
+              </div>
+              
               <button 
                 className="mobile-close-btn"
                 onClick={closeMenu}
@@ -136,6 +211,18 @@ const Navbar = () => {
             </div>
             
             <div className="mobile-nav-items">
+              <a
+                href="#home"
+                className={`mobile-nav-link ${activeSection === 'home' ? 'active' : ''}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('#home');
+                }}
+              >
+                <span className="mobile-nav-icon"><Terminal size={18} /></span>
+                <span className="mobile-nav-text">Home</span>
+                <div className="mobile-nav-indicator"></div>
+              </a>
               {navItems.map((item) => (
                 <a
                   key={item.name}

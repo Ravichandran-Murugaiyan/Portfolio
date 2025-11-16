@@ -4,9 +4,9 @@ import "./style.css";
 
 const About = () => {
   const skills = [
-    { icon: <Terminal size={20} />, label: "Full Stack Development", level: "Advanced" },
-    { icon: <Cpu size={20} />, label: "AI & Machine Learning", level: "Intermediate" },
-    { icon: <Shield size={20} />, label: "Cybersecurity", level: "Intermediate" },
+    { icon: <Terminal size={20} />, label: "Full Stack Development", level: "Intermediate" },
+    { icon: <Cpu size={20} />, label: "Data Science", level: "Beginner" },
+    { icon: <Shield size={20} />, label: "Web Development", level: "Intermediate" },
     { icon: <Code2 size={20} />, label: "Problem Solving", level: "Expert" }
   ];
 

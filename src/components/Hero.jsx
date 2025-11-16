@@ -9,7 +9,7 @@ const Hero = () => {
   const [matrixChars, setMatrixChars] = useState([]);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
-  const roles = ["Full Stack Developer..", "Data Science Enthusiast..", "Team Lead..", "Trainer.."];
+  const roles = ["Full Stack Developer..", "Data Science Enthusiast..", "self Learner..", "Problem Solver.."];
 
   useEffect(() => {
     const handleMouseMove = (e) => {

@@ -24,7 +24,6 @@ const Home = () => {
       <Certifications />
       <Education />
       <GetTouch/>
-      <AIAssistant/>
       <Footer/>
 
     </div>
